@@ -14,7 +14,7 @@ RUN \
 ENV KCP_PORT=4440 KCP_MODE=fast MTU=1400 SNDWND=128 RCVWND=512 DATASHARD=10 PARITYSHARD=3 REMOTEADDR=unknown
 
 ADD entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT  /entrypoint.sh
+RUN chmod +x /entrypoint.sh && crontab -l
+ENTRYPOINT  sh /entrypoint.sh ; crond -f
 
 EXPOSE $KCP_PORT/TCP
