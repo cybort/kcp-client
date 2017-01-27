@@ -12,9 +12,9 @@ RUN \
     && apk del .build-deps \
     && apk add --no-cache supervisor
 
-COPY supervisord.conf /etc/supervisord.conf
-
 ENV KCP_PORT=4440 KCP_MODE=fast MTU=1400 SNDWND=128 RCVWND=512 DATASHARD=10 PARITYSHARD=3 REMOTEADDR=unknown
 EXPOSE $KCP_PORT
 
-ENTRYPOINT ["/usr/bin/supervisord -c /etc/supervisord.conf"]
+CMD /opt/kcptun/client_linux_amd64 -r %(ENV_REMOTEADDR)s -l :%(ENV_KCP_PORT)s --crypt none --mode %(ENV_KCP_MODE)s --mtu %(ENV_MTU)s --sndwnd %(ENV_SNDWND)s --rcvwnd %(ENV_RCVWND)s --datashard %(ENV_DATASHARD)s --parityshard %(ENV_PARITYSHARD)s --nocomp
+
+
