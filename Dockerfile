@@ -17,4 +17,4 @@ COPY supervisord.conf /etc/supervisord.conf
 ENV KCP_PORT=4440 KCP_MODE=fast MTU=1400 SNDWND=128 RCVWND=512 DATASHARD=10 PARITYSHARD=3 REMOTEADDR=unknown
 EXPOSE $KCP_PORT
 
-ENTRYPOINT ["/usr/bin/supervisord"]
+ENTRYPOINT ["/usr/bin/supervisord -c /etc/supervisord.conf"]
